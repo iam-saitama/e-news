@@ -6,9 +6,31 @@ from .models import NewsCategory, News
 # Главная страница
 def home_page(request):
     # Достаем данные из БД
-    categories = NewsCategory.objects.all()
+    category = NewsCategory.objects.all()
     news = News.objects.all()
     # Передаем данные на frontend
-    contex = {'categories': categories, 'news': news}
+    context = {'category': category, 'news': news}
 
-    return render(request, 'home.html', contex)
+    return render(request, 'home.html', context)
+
+
+# Вывод новости по выбранной категории
+def category_page(request, pk):
+    # Достаем выбранную категорию
+    category = NewsCategory.objects.get(id=pk)
+    # Фильтруем новости по категории
+    news = News.objects.filter(category=category)
+    # Передаем данные на frontend
+    context = {'category': category, 'news': news}
+
+    return render(request, 'category.html', context)
+
+
+# Вывод определенной новости
+def news_page(request, pk):
+    # Вывод выбранной новости
+    news = News.objects.get(id=pk)
+    # Передаем данные на frontend
+    context = {'news': news}
+
+    return render(request, 'news.html', context)

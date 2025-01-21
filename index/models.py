@@ -12,7 +12,7 @@ class NewsCategory(models.Model):
 
 # Таблица новостей
 class News(models.Model):
-    title = models.CharField("Заголовок", max_length=256)
+    title = models.CharField("Заголовок", max_length=512)
     content = models.TextField("Основной текст")
     category = models.ForeignKey(
         NewsCategory,
