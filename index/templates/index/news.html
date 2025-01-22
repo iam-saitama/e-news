@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <aside class="sidebar">
+                    <a href="{% url 'home_page' %}" class="btn btn-home">Главная</a>
+                    <a href="{% url 'category_list' %}" class="btn btn-category-list">Категории</a>
+                    <h2>Категории</h2>
+                    <ul class="category-list">
+                        {% for category in categories %}
+                            <li>
+                                <a href="{% url 'category_page' category.id %}">{{ category.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <h2>Последние новости</h2>
+                    <ul class="news-list">
+                        {% for item in news_list %}
+                            <li>
+                                <a href="{% url 'news_page' item.id %}">{{ item.title }}</a>
+                            </li>
+                        {% empty %}
+                            <li>Нет новостей для отображения.</li>
+                        {% endfor %}
+                    </ul>
+                </aside>
+            </div>
+
+            <!-- Главный контент -->
+            <div class="col-md-9 main-content">
+                <div class="news-item">
+                    <h2>{{ news.title }}</h2>
+                    <p>{{ news.content }}</p>
+                    <p class="category">Категория: {{ news.category.title }}</p>
+                    <p class="date">Дата: {{ news.created_at|date:"d.m.Y" }}</p>
+                    <a href="{% url 'category_page' news.category.id %}">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Your Site Name</p>
+    </footer>
+</body>
+</html>
