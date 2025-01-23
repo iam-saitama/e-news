@@ -15,10 +15,9 @@
     <div class="d-flex">
         <!-- Sidebar -->
         <aside class="sidebar">
+            <a href="{% url 'register' %}" class="btn btn-home">Регистрация</a>
             <a href="{% url 'home_page' %}" class="btn btn-home">Главная</a>
-            <a href="{% url 'category_list' %}" class="btn btn-category-list">Категории</a>
-            <ul class="category-list">
-            </ul>
+            <a href="{% url 'category_list' %}" class="btn btn-home">Категории</a>
             <h2>Последние новости</h2>
             <ul class="news-list">
                 {% for item in news %}
@@ -37,7 +36,7 @@
             {% for item in news %}
                 <div class="news-item">
                     <h3 class="news-title">{{ item.title }}</h3>
-                    <p class="news-content">{{ item.content|truncatechars:100 }}</p>
+                    <p class="news-content">{{ item.content|truncatechars:128 }}</p>
                     <p class="news-category">Категория: {{ item.category.title }} | Дата: {{ item.created_at|date:"d.m.Y" }}</p>
                     <a href="{% url 'news_page' item.id %}">Читать дальше</a>
                 </div>

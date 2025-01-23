@@ -7,4 +7,5 @@ urlpatterns = [
     path('news/<int:pk>/', views.news_page, name='news_page'),
     path('category/<int:pk>/', views.category_page, name='category_page'),
     path('categories/', views.category_list, name='category_list'),
+    path('register/', views.Register.as_view(), name='register'),
 ]

@@ -1,6 +1,10 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
 from .models import NewsCategory, News
+from .forms import RegForm
+from django.views import View
+from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 # Главная страница
@@ -49,3 +53,56 @@ def news_page(request, pk):
     context = {'news': news, 'news_list': news_list, 'categories': categories}
 
     return render(request, 'index/news.html', context)
+
+
+# Регистрация
+class Register(View):
+    template_name = 'registration/register.html'
+
+    # Выдача формы
+    def get(self, request):
+        context = {'form': RegForm}
+        return render(request, self.template_name, context)
+
+    # Получение ифны с формы
+    def post(self, request):
+        form = RegForm(request.POST)
+
+        # Если данные корректны
+        if form.is_valid():
+            username = form.clean_username()
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password2')
+
+            # Объект класса User
+            user = User.objects.create_user(username=username,
+                                            email=email,
+                                            password=password)
+            user.save()
+
+            # Авторизуем пользователя
+            login(request, user)
+            return redirect('/')
+        # Если данные некорректны
+        context = {'form': RegForm, 'message': 'Пароль или почта неверны!'}
+        return render(request, self.template_name, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

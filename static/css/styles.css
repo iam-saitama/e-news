@@ -30,14 +30,14 @@ header h1 {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 280px; /* Set width of sidebar */
+    width: 280px;
     background-color: #f4f4f4;
     padding: 20px;
     position: fixed;
     left: 0;
     top: 0;
-    height: 100%; /* Make the sidebar full height */
-    overflow-y: auto; /* Allow scrolling if content is too long */
+    height: 100%;
+    overflow-y: auto;
 }
 
 .sidebar h2 {
@@ -70,7 +70,7 @@ header h1 {
 
 /* Main Content Styles */
 .main-content {
-    margin-left: 300px;
+    margin-left: 360px;
     padding: 20px;
     width: calc(100% - 500px);
 }
@@ -146,6 +146,92 @@ header h1 {
     margin-bottom: 10px;
 }
 
+/* Form Styling */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-submit {
+    display: inline-block;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    display: inline-block;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+
+/* Alerts */
+.alert {
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: 600px;
+    margin: 0 auto;
+    padding: 4px 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+}
+
+
 /* Button for Home */
 .btn-home {
     font-size: 1rem;
@@ -168,4 +254,60 @@ header h1 {
 .btn-category-list:hover {
     background-color: #333;
     color: #fff;
+}
+
+/* Registration Styles */
+.registration {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Registration Styles */
+.registration {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+/* Form Input Fields */
+.registration .form-group {
+    margin-bottom: 15px;
+}
+
+.registration .form-group label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.registration .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Password Guidelines Styling */
+.password-guidelines {
+    margin-top: 10px;
+    padding-left: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.password-guidelines ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.password-guidelines li {
+    margin-bottom: 5px;
 }
