@@ -54,21 +54,23 @@
 
         <!-- Главный контент -->
         <div class="main-content">
-            <h2>Список категорий</h2>
-            {% for category in categories %}
+            <h2>Избранные новости</h2>
+            {% for item in favorite_news %}
                 <div class="news-item">
-                    <!-- Category Title -->
-                    <h3 class="news-title">{{ category.title }}</h3>
-                    <p class="news-category">Количество новостей: {{ category.news_set.count }}</p>
-
-                    <!-- Button to Open Category -->
-                    <a href="{% url 'category_page' category.id %}" class="news-item">Открыть</a>
+                    <h3 class="news-title">{{ item.news.title }}</h3>
+                    <p class="news-content">{{ item.news.content|truncatechars:128 }}</p>
+                    <p class="news-category">Категория: {{ item.news.category.title }} | Дата: {{ item.news.created_at|date:"d.m.Y" }}</p>
+                    <a href="{% url 'news_page' item.news.id %}">Читать дальше</a>
+                    <form action="{% url 'remove_from_favorites' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="news_id" value="{{ item.news.id }}">
+                        <button type="submit" class="btn btn-remove">Удалить из избранного</button>
+                    </form>
                 </div>
             {% empty %}
-                <p>Нет категорий для отображения.</p>
+                <p>Вы еще не добавили новости в избранное.</p>
             {% endfor %}
         </div>
     </div>
-
 </body>
 </html>

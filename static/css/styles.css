@@ -12,21 +12,125 @@ body {
     color: #333;
     line-height: 1.6;
     padding: 20px;
+    margin-left: 260px;
 }
 
-/* Header */
 header {
-    text-align: center;
-    margin-bottom: 40px;
+    text-align: center; /* Center-align the content */
+    margin-left: 20px;
+    margin-bottom: 80px; /* Maintain spacing below the header */
+    position: relative; /* For absolute-positioned elements inside the header */
+    background-color: #f5f5f5; /* Light background for elegance */
+    padding: 120px 20px; /* Add padding for better spacing */
+    border-bottom: 2px solid #ddd; /* Subtle separator below the header */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
 }
 
+/* Header Title */
 header h1 {
-    text-transform: uppercase;
-    font-family: Helvetica
-    font-size: 2.1rem;
-    color: #333;
-    font-weight: 600;
+    font-size: 3rem; /* Larger and prominent font size */
+    font-weight: 700; /* Bold for emphasis */
+    color: #333; /* Dark gray for elegance */
+    letter-spacing: 1.2px; /* Slight letter spacing */
+    text-transform: uppercase; /* Optional: Make the title all caps */
+    margin-bottom: 10px; /* Space below the title */
 }
+
+
+/* Header Section with Search and Auth Buttons */
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+    width: auto;
+    position: absolute;
+    top: 1px;
+    right: 20px;
+}
+
+.auth-buttons a {
+    padding: 4px 10px;
+    font-size: 16px;
+    background-color: #ffc107;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 4px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.auth-buttons a:hover {
+    background-color: #e0a800;
+}
+
+.auth-buttons a:focus {
+    outline: none;
+    background-color: #e0a800;
+}
+
+/* Search Bar */
+.search-form {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 270px;
+    right: 20px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+.search-btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: 1px solid #007BFF;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.search-btn:focus {
+    outline: none;
+    background-color: #0056b3;
+}
+
+.messages {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    max-width: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
 
 /* Sidebar Styles */
 .sidebar {
@@ -41,38 +145,21 @@ header h1 {
 }
 
 .sidebar h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.sidebar .category-list,
-.sidebar .news-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.sidebar .category-list li,
-.sidebar .news-list li {
-    margin-bottom: 10px;
-}
-
-.sidebar .category-list li a,
-.sidebar .news-list li a {
-    text-decoration: none;
-    color: #555;
-    transition: color 0.3s;
-}
-
-.sidebar .category-list li a:hover,
-.sidebar .news-list li a:hover {
-    color: #222;
+    font-size: 1.6rem;
+    margin-bottom: 20px; /* Add some spacing below */
+    font-weight: 600; /* Semi-bold for a refined look */
+    color: #333; /* Elegant dark gray */
+    text-transform: uppercase; /* Optional: Makes the text all caps for emphasis */
+    letter-spacing: 1px; /* Slight spacing between letters for readability */
+    border-bottom: 2px solid #ccc; /* Subtle underline */
+    padding-bottom: 5px; /* Space between the text and underline */
 }
 
 /* Main Content Styles */
 .main-content {
-    margin-left: 360px;
-    padding: 20px;
-    width: calc(100% - 500px);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
 }
 
 /* News Item Styles */
@@ -127,6 +214,34 @@ header h1 {
     background-color: #8e8e8e;
     color: #fff;
     border-radius: 5px;
+}
+
+/* Sidebar link styles */
+.sidebar .category-list,
+.sidebar .news-list {
+    list-style: none; /* Removes the default bullets */
+    padding: 0; /* Removes the default padding */
+    margin: 0; /* Removes the default margin */
+}
+
+/* Styling for the links */
+.sidebar .category-list li a,
+.sidebar .news-list li a {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px 15px;
+    border-radius: 6px;
+    display: block;
+    background-color: #f9f9f9;
+}
+
+/* Hover effect */
+.sidebar .category-list li a:hover,
+.sidebar .news-list li a:hover {
+    color: #222;
+    background-color: #f2f2f2;
+    text-decoration: underline;
 }
 
 /* Sidebar Button Styles */
@@ -216,6 +331,7 @@ form {
     border-radius: 4px;
     font-size: 0.875rem;
     text-align: center;
+
 }
 
 .alert-danger {
@@ -230,7 +346,6 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
 }
-
 
 /* Button for Home */
 .btn-home {
@@ -256,14 +371,6 @@ form {
     color: #fff;
 }
 
-/* Registration Styles */
-.registration {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
 
 /* Registration Styles */
 .registration {
@@ -304,8 +411,8 @@ form {
 }
 
 .password-guidelines ul {
-    list-style: none;
-    padding-left: 0;
+    list-style-type: disc;
+    padding-left: 20px;
 }
 
 .password-guidelines li {

@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
-from .models import NewsCategory, News
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import NewsCategory, News, FavoriteNews
 from .forms import RegForm
 from django.views import View
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -88,13 +91,70 @@ class Register(View):
         return render(request, self.template_name, context)
 
 
+# Выход из аккаунта
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 
+# Поиск
+def search(request):
+    query = request.GET.get('q', '').strip()
+
+    if query:
+        matching_news = News.objects.filter(title__icontains=query)
+
+        if matching_news.exists():
+            return redirect(reverse('news_page', args=[matching_news.first().id]))
+        else:
+            messages.error(request, f"К сожалению, ничего не найдено по запросу: '{query}'.")
+            return redirect(reverse('home_page'))
+    else:
+        messages.warning(request, "Введите текст для поиска.")
+        return redirect(reverse('home_page'))
 
 
+# Добавление в избранное
+@login_required
+def add_to_favorites(request):
+    if request.method == 'POST':
+        news_id = request.POST.get('news_id')
+        user = request.user
+        news = get_object_or_404(News, id=news_id)
+
+        if not FavoriteNews.objects.filter(user=user, news=news).exists():
+            FavoriteNews.objects.create(user=user, news=news)
+            messages.success(request, 'Новость добавлена в избранное!')
+        else:
+            messages.warning(request, 'Эта новость уже в избранном.')
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))
 
 
+# Удаление из избранного
+@login_required
+def remove_from_favorites(request):
+    if request.method == 'POST':
+        news_id = request.POST.get('news_id')
+        user = request.user
 
+        deleted = FavoriteNews.objects.filter(user=user, news_id=news_id).delete()
+        if deleted[0] > 0:
+            messages.success(request, 'Новость удалена из избранного.')
+        else:
+            messages.warning(request, 'Этой новости не было в избранном.')
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+# Функция для отображения избранных новостей
+@login_required
+def view_favorites(request):
+    user = request.user
+    # Получаем все избранные новости для текущего пользователя
+    favorite_news = FavoriteNews.objects.filter(user=user).select_related('news')
+    # Передаем их в шаблон
+    return render(request, 'index/favorites.html', {'favorite_news': favorite_news})
 
 
 
